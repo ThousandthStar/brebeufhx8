@@ -158,9 +158,7 @@
 			</div>
 		</div>
 		<div class="flex-grow-0">
-			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800" onclick={toggle_receive}>✨ Generate your study
-				guide!
-			</Form.Button>
+			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800" onclick={toggle_receive}>✨ Generate your study guide!</Form.Button>
 			<p class="{received ? '' : 'hidden'}">Request received!</p>
 		</div>
 	</div>

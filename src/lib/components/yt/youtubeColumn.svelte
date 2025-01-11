@@ -23,7 +23,7 @@
 	{#if !videos}
 		<p>Loading YouTube videos...</p>
 	{:else}
-		<h2 class="text-xl font-bold mb-2">Video summaries</h2>
+		<h2 class="text-xl font-bold m-2">Video summaries</h2>
 		{#each $videos as video}
 			<div class="">
 				<YoutubeCard video={video} />

@@ -12,7 +12,7 @@
 	import { videos } from '$lib/stores/videos';
 	import {fade} from 'svelte/transition';
 
-	let { data } = $props();
+	let data = $props();
 
 	let atTop = $state(true);
 
@@ -113,8 +113,8 @@
 </script>
 
 <!-- title -->
-<div class="flex h-screen flex-col title_bg items-center justify-start space-y-7">
-	<h1 class="text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-800 bg-clip-text text-transparent">
+<div class="flex h-screen flex-col title_bg items-center place-content-center space-y-7">
+	<h1 class="fixed-title text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_1.2px_1.2px_rgba(1,1,1,0.8)] brightness-90">
 		STUDBUD
 	</h1>
 	{#if atTop}
@@ -132,8 +132,8 @@
 	</div>
 	<!--	info -->
 	<div>
-		{#if data.form.concepts}
-
+		{#if data.form}
+			<Button variant="outline" class="text-md ml-4" onclick={() => downloadPDF()}>Download PDF</Button>
 			<div class="flex flex-row space-x-3">
 				<YoutubeColumn keywords={data.form.concepts} />
 				<SummaryColumn concepts={data.form.concepts} summaries={data.form.summaries} />
@@ -143,7 +143,6 @@
 				<QuizletColumn quizlets={data.form.exercise_list} header="Worksheets" />
 				<ScheduleColumn schedule={data.form.schedule} />
 			</div>
-			<Button variant="outline" class="text-md" onclick={() => downloadPDF()}>Download PDF</Button>
 		{/if}
 	</div>
 </div>
