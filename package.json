@@ -34,7 +34,13 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"@langchain/community": "^0.3.24",
+		"@langchain/core": "^0.3.28",
+		"@langchain/langgraph": "^0.2.39",
+		"@langchain/openai": "^0.3.16",
 		"@tailwindcss/forms": "^0.5.9",
-		"@tailwindcss/typography": "^0.5.15"
+		"@tailwindcss/typography": "^0.5.15",
+		"dotenv": "^16.4.7",
+		"jsdom": "^26.0.0"
 	}
 }
