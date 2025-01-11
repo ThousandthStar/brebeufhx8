@@ -10,6 +10,7 @@
 	import pdfMake from 'pdfmake/build/pdfmake';
 	import 'pdfmake/build/vfs_fonts';
 	import { videos } from '$lib/stores/videos';
+	import {fade} from 'svelte/transition';
 
 	let { data } = $props();
 
