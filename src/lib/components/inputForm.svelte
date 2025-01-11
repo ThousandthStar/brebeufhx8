@@ -2,20 +2,18 @@
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 	import { inFormSchema, type InFormSchema } from '$lib/formSchema';
-	import SuperDebug, {
+	import {
 		type SuperValidated,
 		type Infer,
 		superForm
 	} from 'sveltekit-superforms';
 	import {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		Button,
 		buttonVariants
 	} from '$lib/components/ui/button/index.js';
 	import { Calendar } from '$lib/components/ui/calendar/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { browser, dev } from '$app/environment';
 	import * as Select from '$lib/components/ui/select';
 	import { cn } from '$lib/utils';
 	import CalendarIcon from 'lucide-svelte/icons/calendar';
@@ -28,7 +26,7 @@
 		today
 	} from '@internationalized/date';
 
-	let { data, loadingData = $bindable(false) }: SuperValidated<Infer<InFormSchema>> = $props();
+	let data: SuperValidated<Infer<InFormSchema>> = $props();
 
 	const form = superForm(data, {
 		validators: zodClient(inFormSchema),
@@ -154,9 +152,7 @@
 			</div>
 		</div>
 		<div class="flex-grow-0">
-			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800" onclick={() => loadingData = true}>✨ Generate your
-				study guide!
-			</Form.Button>
+			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800">✨ Generate your study guide!</Form.Button>
 		</div>
 	</div>
 	<!--{#if browser && dev}

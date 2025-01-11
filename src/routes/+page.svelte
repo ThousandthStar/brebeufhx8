@@ -7,15 +7,13 @@
 	import QuizletColumn from '$lib/components/quizlet/quizletColumn.svelte';
 	import ScheduleColumn from '$lib/components/schedule/scheduleColumn.svelte';
 	import { onMount } from 'svelte';
-	import pdfMake from "pdfmake/build/pdfmake";
-	import "pdfmake/build/vfs_fonts";
+	import pdfMake from 'pdfmake/build/pdfmake';
+	import 'pdfmake/build/vfs_fonts';
 	import { videos } from '$lib/stores/videos';
 
 	let { data } = $props();
 
 	let atTop = $state(true);
-
-	let loading = $state(false);
 
 	function handleScroll() {
 		atTop = window.scrollY <= 30;
@@ -40,48 +38,48 @@
 		const subject = data.form.subject;
 		const type = data.form.type;
 
-		
-		let concept_objects = []
+
+		let concept_objects = [];
 		concepts.forEach((concept, i) => {
-			concept_objects.push({text: concept, style: 'thirdheader'});
-			concept_objects.push({text: summaries[i]});
+			concept_objects.push({ text: concept, style: 'thirdheader' });
+			concept_objects.push({ text: summaries[i] });
 		});
 
 		var fonts = {
 			Roboto: {
 				normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.1/fonts/Roboto/Roboto-Regular.ttf',
-				bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.1/fonts/Roboto/Roboto-Medium.ttf',
-			},
-		}
+				bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.1/fonts/Roboto/Roboto-Medium.ttf'
+			}
+		};
 		pdfMake.addFonts(fonts);
 
-		let quizlet_objects = []
+		let quizlet_objects = [];
 		quizlets.forEach((quizlet, i) => {
-			quizlet_objects.push({text: quizlet.name, link: quizlet.url, style: 'link'});
+			quizlet_objects.push({ text: quizlet.name, link: quizlet.url, style: 'link' });
 		});
 
-		let youtube_objects = []
+		let youtube_objects = [];
 		$videos.forEach((video, i) => {
-			youtube_objects.push({text: video.title, link: `https://www.youtube.com/watch?v=${video.id}`, style: 'link'});
+			youtube_objects.push({ text: video.title, link: `https://www.youtube.com/watch?v=${video.id}`, style: 'link' });
 		});
 
-		let exercise_objects = []
+		let exercise_objects = [];
 		data.form.exercise_list.forEach((exercise, i) => {
-			exercise_objects.push({text: exercise.name, link: exercise.url, style: 'link'});
+			exercise_objects.push({ text: exercise.name, link: exercise.url, style: 'link' });
 		});
 
 		const docDefinition = {
 			content: [
-				{text: 'STUDBUD AI guide', style: 'header'},
-				{text: `${subject} ${type} on ${date}`, style: 'subheader'},
-				{text: 'Key Concepts', style: 'subheader'},
+				{ text: 'STUDBUD AI guide', style: 'header' },
+				{ text: `${subject} ${type} on ${date}`, style: 'subheader' },
+				{ text: 'Key Concepts', style: 'subheader' },
 				concept_objects,
-				{text: 'Quizlets', style: 'subheader'},
+				{ text: 'Quizlets', style: 'subheader' },
 				quizlet_objects,
-				{text: 'YouTube Videos', style: 'subheader'},
+				{ text: 'YouTube Videos', style: 'subheader' },
 				youtube_objects,
-				{text: 'Worksheets', style: 'subheader'},
-				exercise_objects,
+				{ text: 'Worksheets', style: 'subheader' },
+				exercise_objects
 			],
 			defaultStyle: {
 				fontSize: 12,
@@ -114,9 +112,9 @@
 </script>
 
 <!-- title -->
-<div class="flex flex-col h-[50rem] items-center justify-start space-y-7">
-	<h1 class="text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-800 bg-clip-text text-transparent mt-[25rem]">
-		STUDBUD 
+<div class="flex h-screen flex-col title_bg items-center justify-start space-y-7">
+	<h1 class="text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-800 bg-clip-text text-transparent">
+		STUDBUD
 	</h1>
 	{#if atTop}
 		<div transition:fade>
@@ -129,7 +127,7 @@
 <div class="flex flex-col space p-4 bg-slate-200" id="content">
 	<!--	form -->
 	<div class="m-10">
-		<InputForm data={data.form} bind:loadingData={loading} />
+		<InputForm data={data.form} />
 	</div>
 	<!--	info -->
 	<div>
