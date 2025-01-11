@@ -12,6 +12,7 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	default: async (event) => {
+		console.log('default action');
 		const form = await superValidate(event, zod(inFormSchema));
 		if (!form.valid) {
 			return fail(400, {
@@ -20,8 +21,24 @@ export const actions: Actions = {
 		}
 
 		const formData = form.data;
+		const correctFormData = {
+			subject: formData.topic,
+			grade: formData.grade,
+			type: formData.type_of_eval
+		};
 
-		//TODO: Do something with formData
+		// Get concepts
+		const concepts = await event
+			.fetch('/api/base-concepts', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(correctFormData)
+			})
+			.then((res) => res.json());
+
+		//TODO: all the other things <--- this is here. (suppose concepts is ok)
 
 		return {
 			form

@@ -158,7 +158,7 @@
 			<Form.Button>Generate your study guide!</Form.Button>
 		</div>
 	</div>
-	<!--{#if browser && dev}-->
-	<!--	<SuperDebug data={$formData} />-->
-	<!--{/if}-->
+	{#if browser && dev}
+		<SuperDebug data={$formData} />
+	{/if}
 </form>

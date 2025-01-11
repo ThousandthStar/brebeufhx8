@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InputForm from '$lib/components/inputForm.svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import { Button } from "$lib/components/ui/button/index.js";
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let data = $props();
 
