@@ -24,14 +24,16 @@ export const POST: RequestHandler = async ({request}) => {
             const quizLinks = document.querySelectorAll('a[href^="https://quizlet.com"]');
             const topTwoLinks = Array.from(quizLinks).slice(1, 3);
 
-            // Extract the URLs and quiz names
-            const quizzes = Array.from(topTwoLinks).map((link) => ({
-                name: link.children[0].textContent.trim(), // Extract the quiz name
-                url: link.href // Extract the quiz URL
-            }));
 
-            // Convert the result to JSON format and log it
-            quiz_list.push(quizzes);
+            // Extract the URLs and quiz names
+
+            quiz_list.push(...topTwoLinks.map(link => ({
+                url: link.href,
+                name: link.children[0].textContent.trim()
+            })));
+
+
+            // Convert the result to JSON format and log itp
         } catch (error) {
             console.error(error.message);
             if (error.response) {

@@ -19,6 +19,8 @@ export const actions: Actions = {
 			});
 		}
 
+		console.log("Starting search");
+
 		const formData = form.data;
 		const correctFormData = {
 			subject: formData.topic,
@@ -29,20 +31,20 @@ export const actions: Actions = {
 
 		// TODO: Uncomment this when the API is ready
 		// Get concepts
-		// const concepts = await event
-		// 	.fetch('/api/base-concepts', {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json'
-		// 		},
-		// 		body: JSON.stringify(correctFormData)
-		// 	})
-		// 	.then((res) => res.json());
-		let concepts = ['n1', 'n2', 'n3'];
+		
+		const concepts = await event
+			.fetch('/api/base-concepts', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(correctFormData)
+			})
+			.then((res) => res.json());
 
 		// TODO: all the other things <--- this is here. (suppose concepts is ok)
 
-
+		
 		// Get summaries
 		const summaries = await event
 			.fetch('/api/summaries', {
@@ -56,10 +58,10 @@ export const actions: Actions = {
 				})
 			})
 			.then((res) => res.json());
-
+		
 		//TODO: all the other things <--- this is here. (suppose concepts is ok)
 		correctFormData["concepts"] = concepts;
-		const quizzes = await event
+		const quizlets = await event
 			.fetch('/api/quizlet', {
 				method: 'POST',
 				headers: {
@@ -69,13 +71,51 @@ export const actions: Actions = {
 			})
 			.then((res) => res.json());
 		
+		const exercise_list = await event
+			.fetch('/api/exercices', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					concepts,
+					grade: formData.grade
+				})
+			})
+			.then((res) => res.json());
+		
+		const schedule = await event
+			.fetch('/api/schedule', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					key_concepts: concepts,
+					current_date: new Date().toLocaleDateString(),
+					evaluation_date: formData.date,
+					evaluation_type: formData.type_of_eval,
+					grade: formData.grade
+				})
+			})
+			.then((res) => res.json());
+		
+		
+		
 		console.log(concepts)
-		console.log(quizzes);
+		console.log(quizlets);
+		console.log(summaries);
+		console.log(exercise_list);
+		console.log(schedule);
+		
 		
 		return {
 			form,
 			concepts,
-			summaries
+			summaries,
+			quizlets,
+			exercise_list,
+			schedule
 		};
 	}
 };

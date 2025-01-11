@@ -3,6 +3,7 @@ import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { OPENAI_API_KEY } from '$env/static/private';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { ChatOllama } from '@langchain/ollama';
 
 const prompt_template = ChatPromptTemplate.fromTemplate(`
 Given the following key concept and grade, please summarize this key concept for a student in this grade:
@@ -21,6 +22,14 @@ const llm = new ChatOpenAI({
 	apiKey: OPENAI_API_KEY
 });
 
+/*
+const llm = new ChatOllama({
+	temperature: 0.0,
+	model: 'mistral',
+});
+*/
+
+
 const parser = new StringOutputParser();
 
 const chain = prompt_template.pipe(llm).pipe(parser);
@@ -28,7 +37,7 @@ const chain = prompt_template.pipe(llm).pipe(parser);
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { concepts, grade } = await request.json();
-
+	let summaries = [];
 	for (const key_concept of concepts) {
 		const res = await chain.invoke({
 			key_concept,

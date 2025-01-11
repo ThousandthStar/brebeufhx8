@@ -4,6 +4,9 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import YoutubeColumn from '$lib/components/yt/youtubeColumn.svelte';
 	import SummaryColumn from '$lib/components/summaries/summaryColumn.svelte';
+	import QuizletColumn from '$lib/components/quizlet/quizletColumn.svelte';
+	import ScheduleColumn from '$lib/components/schedule/scheduleColumn.svelte';
+	import { onMount } from 'svelte';
 
 	let data = $props();
 
@@ -16,14 +19,20 @@
 </script>
 
 <!-- navbar -->
-<div class="flex justify-end items-center bg-slate-800 py-3 px-5">
-	<a href="https://github.com/ThousandthStar/brebeufhx8">
-		<Avatar.Root>
-			<Avatar.Image src="/img/GitHub-Mark-ea2971cee799.png" alt="GitHub" />
-			<Avatar.Fallback>GitHub</Avatar.Fallback>
-		</Avatar.Root>
-	</a>
+<div class="flex justify-between items-center bg-slate-800 px-5 py-5">
+	<div class="flex justify-start items-center space-x-5">
+		<b><h2 class="text-2xl font-bold text-white">Made with ❤️ by Andrey and Émilien</h2></b>
+	</div>
+	<div class="flex justify-end items-center">
+		<a target="_blank" href="https://github.com/ThousandthStar/brebeufhx8">
+			<Avatar.Root>
+				<Avatar.Image src="/img/GitHub-Mark-ea2971cee799.png" alt="GitHub" />
+				<Avatar.Fallback>GitHub</Avatar.Fallback>
+			</Avatar.Root>
+		</a>
+	</div>
 </div>
+
 
 <!-- title -->
 <div class="flex flex-col h-[50rem] items-center justify-center space-y-7">
@@ -45,6 +54,11 @@
 			<div class="flex flex-row space-x-3">
 				<YoutubeColumn keywords={data.form.concepts} />
 				<SummaryColumn concepts={data.form.concepts} summaries={data.form.summaries} />
+			</div>
+			<div class="flex flex-row">
+				<QuizletColumn quizlets={data.form.quizlets} header="Quizlets" />
+				<QuizletColumn quizlets={data.form.exercise_list} header="Worksheets" />
+				<ScheduleColumn schedule={data.form.schedule} />
 			</div>
 		{/if}
 	</div>

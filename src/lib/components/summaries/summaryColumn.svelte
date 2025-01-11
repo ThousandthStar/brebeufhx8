@@ -3,6 +3,6 @@
 </script>
 
 {#each concepts as concept, i}
-	<h3 class="text-lg">{concept}</h3>
+	<b><h3 class="text-lg">{concept}</h3></b>
 	<p>{summaries[i]}</p>
 {/each}

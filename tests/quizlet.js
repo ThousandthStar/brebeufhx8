@@ -1,17 +1,16 @@
 import { JSDOM } from 'jsdom';
 import { ZenRows } from 'zenrows';
 import dotenv from 'dotenv';
+import scrapingbee from "scrapingbee";
 
 dotenv.config();
 
 (async () => {
-	const client = new ZenRows(process.env.ZENROWS_KEY);
+	var client = new scrapingbee.ScrapingBeeClient(process.env.SCRAPING_BEE_KEY);
 	const url = 'https://quizlet.com/search?query=chemistry-11th-grade&type=all';
 
 	try {
-		const request = await client.get(url, {
-			premium_proxy: 'true'
-		});
+		const request = await client.get({url: encodeURIComponent(url), params:{}});
 		const html = await request.text();
 		const dom = new JSDOM(html);
 		const document = dom.window.document;

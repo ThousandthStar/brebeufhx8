@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import QuizletCard from '$lib/components/quizlet/quizletCard.svelte';
+	import ScheduleCard from '$lib/components/schedule/scheduleCard.svelte';
 
-	let { quizlets, header } = $props();
+	let { schedule } = $props();
 
 	//let quizlets: object[] = $state();
 
@@ -33,14 +33,10 @@
 </script>
 
 <div class="m-4 p-5 w-1/3 rounded-md bg-gray-300">
-	<!--{#if !quizlets}
-		<p>Loading Quizlets...</p>
-	{:else}-->
-		<h2 class="text-xl font-bold mb-2">{header}</h2>
-		{#each quizlets as quizlet, i}
-			<div class="mb-1">
-				<QuizletCard quizlet={quizlet} left={i % 2 === 0} last={i + 1 >= quizlets.length} />
-			</div>
-		{/each}
-	<!--{/if}-->
+    <h2 class="text-xl font-bold mb-2">Schedule</h2>
+    {#each schedule as item, i}
+        <div class="mb-1">
+            <ScheduleCard date={item.date} text={item.content} />
+        </div>
+    {/each}
 </div>

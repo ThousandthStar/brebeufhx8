@@ -1,5 +1,6 @@
 import { JsonOutputParser } from '@langchain/core/output_parsers';
 import { ChatOpenAI } from '@langchain/openai';
+import { ChatOllama } from '@langchain/ollama';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { OPENAI_API_KEY } from '$env/static/private';
 import { json, type RequestHandler } from '@sveltejs/kit';
@@ -28,6 +29,12 @@ const llm = new ChatOpenAI({
 	model: 'gpt-4o-mini',
 	apiKey: OPENAI_API_KEY
 });
+/*
+const llm = new ChatOllama({
+	temperature: 0.0,
+	model: 'mistral',
+});
+*/
 
 const parser = new JsonOutputParser();
 
