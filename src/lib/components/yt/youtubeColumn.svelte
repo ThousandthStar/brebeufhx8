@@ -3,9 +3,8 @@
 	import { onMount } from 'svelte';
 
 	let { keywords } = $props();
-	// let keywords: [] = ['javascript'];
 
-	let videos: object[] = $state();
+	let videos: object[] = $state([]);
 
 	onMount(async () => {
 		// Get YT videos

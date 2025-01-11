@@ -2,6 +2,8 @@
 	import InputForm from '$lib/components/inputForm.svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import YoutubeColumn from '$lib/components/yt/youtubeColumn.svelte';
+	import SummaryColumn from '$lib/components/summaries/summaryColumn.svelte';
 
 	let data = $props();
 
@@ -39,5 +41,11 @@
 	</div>
 	<!--	info -->
 	<div>
+		{#if data.form}
+			<div class="flex flex-row space-x-3">
+				<YoutubeColumn keywords={data.form.concepts} />
+				<SummaryColumn concepts={data.form.concepts} summaries={data.form.summaries} />
+			</div>
+		{/if}
 	</div>
 </div>

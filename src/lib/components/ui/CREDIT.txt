@@ -1,0 +1,2 @@
+All components in this directory (/src/lib/components/ui) are from Shadcn-Svelte, which is licensed under the MIT License.
+These are not my own work, this is simply how the Shadcn-Svelte library works (you copy the files instead of importing everything all at once to save on bundle size).
