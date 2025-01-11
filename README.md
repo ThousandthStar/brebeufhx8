@@ -1,38 +1,15 @@
 # StudBud 
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+StudBud is your AI tutor for when you have a quiz, a test or an exam coming up. Simply tell it what the evaluation is about, what grade you are in and what date it is. StudBud will summarize the key concepts of the subject and fetch you YouTube summaries, Quizlets and worksheets. StudBud will also create a day-by-day study schedule so are as prepared as you can be when the evaluation comes :)
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Natural language input for the subject matter
+- Web scraping using [Zenrows](https://www.zenrows.com/) to get Youtube videos, Quizlet flashcard quizzes and worksheets.
+- OpenAI GPT-4o-mini integration to summarize the keyconcepts and create the study schedule.
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Running locally
 
-# create a new project in my-app
-npx sv create my-app
-```
+To run StudBud locally, create a `.env` file in the root directory. Add your OpenAI API key using `OPENAI_API_KEY="[your key here]"` and add your Zenrows API key using `ZENROWS_KEY="[your key here]"`.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Then, run `npm run dev`.

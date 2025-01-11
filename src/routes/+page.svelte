@@ -131,7 +131,8 @@
 	</div>
 	<!--	info -->
 	<div>
-		{#if data.form}
+		{#if data.form.concepts}
+
 			<div class="flex flex-row space-x-3">
 				<YoutubeColumn keywords={data.form.concepts} />
 				<SummaryColumn concepts={data.form.concepts} summaries={data.form.summaries} />
