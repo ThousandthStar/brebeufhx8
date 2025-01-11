@@ -8,6 +8,7 @@
 		superForm
 	} from 'sveltekit-superforms';
 	import {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		Button,
 		buttonVariants
 	} from '$lib/components/ui/button/index.js';
@@ -53,94 +54,110 @@
 	});
 
 	let selectedDate: DateValue | undefined = $derived($formData.date ? parseDate($formData.date) : undefined);
-
-	let placeholderDate: DateValue = today(getLocalTimeZone());
+	1;
+	let placeholderDate: DateValue = $state(today(getLocalTimeZone()));
 </script>
 
 <form method="POST" use:enhance>
-	<!--	topic -->
-	<Form.Field {form} name="topic">
-		<Form.Control let:attrs>
-			<Form.Label>Topic</Form.Label>
-			<Input {...attrs} bind:value={$formData.topic} />
-		</Form.Control>
-		<Form.Description>The topic or element your evaluation will be on.</Form.Description>
-		<Form.FieldErrors />
-	</Form.Field>
-	<!--	type of eval -->
-	<Form.Field {form} name="type_of_eval">
-		<Form.Control let:attrs>
-			<Select.Root
-				selected={selectedEvalType}
-				onSelectedChange={(v) => {
+	<div class="flex flex-col space-y-3">
+		<div class="flex flex-col md:flex-row space-x-3 space-y-4 md:space-y-0 items-center">
+			<div class="flex-grow">
+				<!--	topic -->
+				<Form.Field {form} name="topic">
+					<Form.Control let:attrs>
+						<Form.Label>Topic</Form.Label>
+						<Input {...attrs} bind:value={$formData.topic} />
+					</Form.Control>
+					<Form.Description>The topic or element your evaluation will be on.</Form.Description>
+					<Form.FieldErrors />
+				</Form.Field>
+			</div>
+			<div class="flex-grow mt-0">
+				<!--	type of eval -->
+				<Form.Field {form} name="type_of_eval">
+					<Form.Control let:attrs>
+						<Form.Label>Type of evaluation</Form.Label>
+						<Select.Root
+							selected={selectedEvalType}
+							onSelectedChange={(v) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           v && ($formData.type_of_eval = v.value);
         }}
-			>
-				<Select.Trigger {...attrs}>
-					<Select.Value placeholder="Select the type of evaluation" />
-				</Select.Trigger>
-				<Select.Content>
-					<Select.Item value="quiz" label="quiz" />
-					<Select.Item value="test" label="test" />
-					<Select.Item value="exam" label="exam" />
-				</Select.Content>
-			</Select.Root>
-			<input hidden bind:value={$formData.type_of_eval} name={attrs.name} />
-		</Form.Control>
-		<Form.Description>The type of evaluation you want to generate.</Form.Description>
-		<Form.FieldErrors />
-	</Form.Field>
-	<!--	grade -->
-	<Form.Field {form} name="grade">
-		<Form.Control let:attrs>
-			<Form.Label>Grade</Form.Label>
-			<Input {...attrs} bind:value={$formData.grade} type="number" />
-		</Form.Control>
-		<Form.Description>The grade you want to generate the evaluation for.</Form.Description>
-		<Form.FieldErrors />
-	</Form.Field>
-	<!--	date -->
-	<Form.Field {form} name="date" class="flex flex-col">
-		<Form.Control let:attrs>
-			<Form.Label>Date of the evaluation</Form.Label>
-			<Popover.Root>
-				<Popover.Trigger
-					{...attrs}
-					class={cn(
+						>
+							<Select.Trigger {...attrs}>
+								<Select.Value placeholder="Select the type of evaluation" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="quiz" label="quiz" />
+								<Select.Item value="test" label="test" />
+								<Select.Item value="exam" label="exam" />
+							</Select.Content>
+						</Select.Root>
+						<input hidden bind:value={$formData.type_of_eval} name={attrs.name} />
+					</Form.Control>
+					<Form.Description>The type of evaluation you want to generate.</Form.Description>
+					<Form.FieldErrors />
+				</Form.Field>
+			</div>
+			<div class="flex-grow">
+				<!--	grade -->
+				<Form.Field {form} name="grade">
+					<Form.Control let:attrs>
+						<Form.Label>Grade</Form.Label>
+						<Input {...attrs} bind:value={$formData.grade} type="number" />
+					</Form.Control>
+					<Form.Description>The grade you want to generate the evaluation for.</Form.Description>
+					<Form.FieldErrors />
+				</Form.Field>
+			</div>
+			<div class="flex-grow pt-2.5">
+				<!--	date -->
+				<Form.Field {form} name="date" class="flex flex-col">
+					<Form.Control let:attrs>
+						<Form.Label>Date of the evaluation</Form.Label>
+						<Popover.Root>
+							<Popover.Trigger
+								{...attrs}
+								class={cn(
             buttonVariants({ variant: "outline" }),
             "w-[280px] justify-start pl-4 text-left font-normal",
             !selectedDate && "text-muted-foreground"
           )}
-				>
-					{selectedDate ? df.format(selectedDate.toDate(getLocalTimeZone())) : "Pick a date"}
-					<CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
-				</Popover.Trigger>
-				<Popover.Content class="w-auto p-0" side="top">
-					<Calendar
-						value={selectedDate}
-						bind:placeholder={placeholderDate}
-						minValue={new CalendarDate(1900, 1, 1)}
-						maxValue={today(getLocalTimeZone())}
-						calendarLabel="Date of the evaluation"
-						initialFocus
-						onValueChange={(v) => {
+							>
+								{selectedDate ? df.format(selectedDate.toDate(getLocalTimeZone())) : "Pick a date"}
+								<CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
+							</Popover.Trigger>
+							<Popover.Content class="w-auto p-0" side="top">
+								<Calendar
+									value={selectedDate}
+									bind:placeholder={placeholderDate}
+									minValue={new CalendarDate(1900, 1, 1)}
+									maxValue={today(getLocalTimeZone())}
+									calendarLabel="Date of the evaluation"
+									initialFocus
+									onValueChange={(v) => {
               if (v) {
                 $formData.date = v.toString()
               } else {
                 $formData.date = "";
               }
             }}
-					/>
-				</Popover.Content>
-			</Popover.Root>
-			<Form.Description>
-				The date of the evaluation
-			</Form.Description>
-			<Form.FieldErrors />
-			<input hidden value={$formData.date} name={attrs.name} />
-		</Form.Control>
-	</Form.Field>
-	<Form.Button>Generate!</Form.Button>
+								/>
+							</Popover.Content>
+						</Popover.Root>
+						<Form.Description>
+							The date of the evaluation
+						</Form.Description>
+						<Form.FieldErrors />
+						<input hidden value={$formData.date} name={attrs.name} />
+					</Form.Control>
+				</Form.Field>
+			</div>
+		</div>
+		<div class="flex-grow-0">
+			<Form.Button>Generate your study guide!</Form.Button>
+		</div>
+	</div>
 	{#if browser && dev}
 		<SuperDebug data={$formData} />
 	{/if}
