@@ -2,7 +2,7 @@
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 </script>
 
-<div class="flex justify-between items-center backdrop-blur px-5 py-5">
+<div class="flex justify-between items-center backdrop-blur px-5 py-5 bg-transparent">
 	<div class="flex justify-start items-center space-x-5">
 		<h2 class="text-2xl font-bold text-slate-700"><b>Made with ❤️ by Andrey and Émilien</b></h2>
 	</div>
