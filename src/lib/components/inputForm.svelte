@@ -28,7 +28,7 @@
 		today
 	} from '@internationalized/date';
 
-	let data: SuperValidated<Infer<InFormSchema>> = $props();
+	let { data, loadingData = $bindable(false) }: SuperValidated<Infer<InFormSchema>> = $props();
 
 	const form = superForm(data, {
 		validators: zodClient(inFormSchema),
@@ -154,7 +154,9 @@
 			</div>
 		</div>
 		<div class="flex-grow-0">
-			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800">✨ Generate your study guide!</Form.Button>
+			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800" onclick={() => loadingData = true}>✨ Generate your
+				study guide!
+			</Form.Button>
 		</div>
 	</div>
 	<!--{#if browser && dev}
