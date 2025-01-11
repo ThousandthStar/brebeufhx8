@@ -23,7 +23,10 @@ Given the following key concept and grade, please summarize this key concept for
 Key concept: {key_concept}
 Grade: grade {grade}
 
-Please only output the summary, nothing else. Avoid using Latex at all costs. Provide an example of a simple problem and it's solution.`)
+Please only output the summary, nothing else. 
+Avoid using Latex at all costs. 
+Avoid using other formatting at all costs. 
+Provide an example of a simple problem and it's solution.`)
 
 const llm = new ChatOpenAI({
     temperature: 0.0,

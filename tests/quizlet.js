@@ -6,17 +6,19 @@ dotenv.config();
 
 (async () => {
     const client = new ZenRows(process.env.ZENROWS_KEY);
-    const url = "https://quizlet.com/search?query=biology-grade-10&type=all";
+    const url = "https://quizlet.com/search?query=chemistry-11th-grade&type=all";
 
     try {
-        const request = await client.get(url, {});
+        const request = await client.get(url, {
+          "premium_proxy": "true"
+        });
         const html = await request.text();
         const dom = new JSDOM(html);
         const document = dom.window.document;
     
         // Select all <a> tags that have a link to a quiz
         const quizLinks = document.querySelectorAll('a[href^="https://quizlet.com"]');
-        const topTwoLinks = Array.from(quizLinks).slice(0, 2);
+        const topTwoLinks = Array.from(quizLinks).slice(1, 3);
     
         // Extract the URLs and quiz names
         const quizzes = Array.from(topTwoLinks).map(link => ({

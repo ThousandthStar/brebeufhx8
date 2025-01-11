@@ -9,7 +9,7 @@ dotenv.config();
 const tvly = tavily({ apiKey: process.env.TAVILY_KEY });
 
 // Step 2. Executing a simple search query
-const response = await tvly.search("Who is Leo Messi?");
+const response = await tvly.search("Get me some quizlets on 11th grade chemistry");
 
 // Step 3. That's it! You've done a Tavily Search!
 console.log(response);
