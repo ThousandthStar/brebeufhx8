@@ -23,32 +23,27 @@ Example:
 }}
 `);
 
-// let subject = 'logarithms';
-// let grade = 11;
-// let type = 'exam';
-
 export const POST: RequestHandler = async ({ request }) => {
 	const { subject, grade, type } = await request.json();
-	console.log(subject, grade, type);
 
-	return json(['n1', 'n2', 'n3']);
+	const llm = new ChatOpenAI({
+		temperature: 0.0,
+		model: 'gpt-4o-mini',
+		apiKey: OPENAI_API_KEY
+	});
 
-	// const llm = new ChatOpenAI({
-	// 	temperature: 0.0,
-	// 	model: 'gpt-4o-mini',
-	// 	apiKey: OPENAI_API_KEY
-	// });
-	//
-	// const parser = new JsonOutputParser();
-	//
-	// const chain = prompt_template.pipe(llm).pipe(parser);
-	//
-	// const res = await chain.invoke({
-	// 	subject,
-	// 	grade,
-	// 	type
-	// });
-	//
-	// console.log(res);
-	// console.log(res.key_concepts);
+	const parser = new JsonOutputParser();
+
+	const chain = prompt_template.pipe(llm).pipe(parser);
+
+	const res = await chain.invoke({
+		subject,
+		grade,
+		type
+	});
+
+	console.log(res);
+	console.log(res.key_concepts);
+
+	return json(res.key_concepts);
 };

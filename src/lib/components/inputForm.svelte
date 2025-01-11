@@ -132,7 +132,6 @@
 									value={selectedDate}
 									bind:placeholder={placeholderDate}
 									minValue={new CalendarDate(1900, 1, 1)}
-									maxValue={today(getLocalTimeZone())}
 									calendarLabel="Date of the evaluation"
 									initialFocus
 									onValueChange={(v) => {
