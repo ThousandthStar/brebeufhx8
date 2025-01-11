@@ -1,22 +1,43 @@
 <script lang="ts">
 	import InputForm from '$lib/components/inputForm.svelte';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import { Button } from "$lib/components/ui/button/index.js";
 
 	let data = $props();
+
+	function scrollToSection(sectionId: string) {
+		const section = document.getElementById(sectionId);
+		if (section) {
+			section.scrollIntoView({ behavior: 'smooth' });
+		}
+	}
 </script>
 
+<!-- navbar -->
+<div class="flex justify-end items-center bg-slate-800 py-3 px-5">
+	<a href="https://github.com/ThousandthStar/brebeufhx8">
+		<Avatar.Root>
+			<Avatar.Image src="/img/GitHub-Mark-ea2971cee799.png" alt="GitHub" />
+			<Avatar.Fallback>GitHub</Avatar.Fallback>
+		</Avatar.Root>
+	</a>
+</div>
+
 <!-- title -->
-<!--<div class="h-96 bg-green-500">-->
-<!--	<h1 class="h1">[TITLE]</h1>-->
-<!--</div>-->
+<div class="flex flex-col h-[50rem] items-center justify-center space-y-7">
+	<h1 class="text-9xl font-bold bg-gradient-to-r from-amber-400 to-blue-200 bg-clip-text text-transparent">
+		STUDY BUDDY
+	</h1>
+	<Button variant="outline" class="text-md" onclick={() => scrollToSection('content')}>Start studying!</Button>
+</div>
 
 <!-- actual content -->
-<div class="flex flex-col space p-4">
+<div class="flex flex-col space p-4 bg-slate-200" id="content">
 	<!--	form -->
-	<div>
-
+	<div class="m-10">
+		<InputForm data={data.form} />
 	</div>
 	<!--	info -->
 	<div>
-		<InputForm data={data.form}/>
 	</div>
 </div>
