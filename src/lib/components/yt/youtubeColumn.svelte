@@ -1,10 +1,9 @@
 <script lang="ts">
 	import YoutubeCard from '$lib/components/yt/youtubeCard.svelte';
 	import { onMount } from 'svelte';
+	import { videos } from '$lib/stores/videos';
 
 	let { keywords } = $props();
-
-	let videos: object[] = $state([]);
 
 	onMount(async () => {
 		// Get YT videos
@@ -15,7 +14,8 @@
 				'content-type': 'application/json'
 			}
 		});
-		videos = (await response.json()).items;
+		const data = await response.json();
+		videos.set(data.items);
 	});
 </script>
 
@@ -24,7 +24,7 @@
 		<p>Loading YouTube videos...</p>
 	{:else}
 		<h2 class="text-xl font-bold mb-2">Video summaries</h2>
-		{#each videos as video}
+		{#each $videos as video}
 			<div class="">
 				<YoutubeCard video={video} />
 			</div>

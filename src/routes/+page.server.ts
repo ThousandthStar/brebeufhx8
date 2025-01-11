@@ -99,6 +99,8 @@ export const actions: Actions = {
 				})
 			})
 			.then((res) => res.json());
+
+		
 		
 		
 		
@@ -115,7 +117,10 @@ export const actions: Actions = {
 			summaries,
 			quizlets,
 			exercise_list,
-			schedule
+			schedule,
+			date: formData.date,
+			subject: formData.topic,
+			type: formData.type_of_eval,
 		};
 	}
 };

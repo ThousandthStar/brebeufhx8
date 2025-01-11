@@ -12,7 +12,7 @@ Key concept: {key_concept}
 Grade: grade {grade}
 
 Please only output the summary, nothing else. 
-Avoid using Latex at all costs. 
+Avoid using Latex formatting at all costs. 
 Avoid using other formatting at all costs. 
 Provide an example of a simple problem and it's solution.`);
 
