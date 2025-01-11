@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const TypeEval = ['test', 'exam', 'quiz'] as const;
+const TypeEval = ['Test', 'Exam', 'Quiz'] as const;
 
 export const inFormSchema = z.object({
 	topic: z.string().min(1).max(200),

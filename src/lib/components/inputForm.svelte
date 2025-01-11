@@ -59,7 +59,7 @@
 </script>
 
 <form method="POST" use:enhance>
-	<div class="flex flex-col space-y-3">
+	<div class="flex flex-col space-y-3 ">
 		<div class="flex flex-col md:flex-row space-x-3 space-y-4 md:space-y-0 items-center">
 			<div class="flex-grow">
 				<!--	topic -->
@@ -88,9 +88,9 @@
 								<Select.Value placeholder="Select the type of evaluation" />
 							</Select.Trigger>
 							<Select.Content>
-								<Select.Item value="quiz" label="quiz" />
-								<Select.Item value="test" label="test" />
-								<Select.Item value="exam" label="exam" />
+								<Select.Item value="Quiz" label="quiz" />
+								<Select.Item value="Test" label="test" />
+								<Select.Item value="Exam" label="exam" />
 							</Select.Content>
 						</Select.Root>
 						<input hidden bind:value={$formData.type_of_eval} name={attrs.name} />
@@ -154,10 +154,10 @@
 			</div>
 		</div>
 		<div class="flex-grow-0">
-			<Form.Button>Generate your study guide!</Form.Button>
+			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800">✨ Generate your study guide!</Form.Button>
 		</div>
 	</div>
-	{#if browser && dev}
+	<!--{#if browser && dev}
 		<SuperDebug data={$formData} />
-	{/if}
+	{/if}-->
 </form>
