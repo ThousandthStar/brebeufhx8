@@ -24,7 +24,7 @@ Example:
 `);
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { subject, grade, type } = await request.json();
+	const { subject, grade, type, date, concepts } = await request.json();
 
 	const llm = new ChatOpenAI({
 		temperature: 0.0,

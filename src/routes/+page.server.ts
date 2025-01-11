@@ -23,7 +23,8 @@ export const actions: Actions = {
 		const correctFormData = {
 			subject: formData.topic,
 			grade: formData.grade,
-			type: formData.type_of_eval
+			type: formData.type_of_eval,
+			date: formData.date
 		};
 
 		// Get concepts
@@ -38,9 +39,24 @@ export const actions: Actions = {
 			.then((res) => res.json());
 
 		//TODO: all the other things <--- this is here. (suppose concepts is ok)
+		correctFormData["concepts"] = concepts;
+		const quizzes = await event
+			.fetch('/api/quizlet', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(correctFormData)
+			})
+			.then((res) => res.json());
+		
+		console.log(concepts)
+		console.log(quizzes);
+		
 
 		return {
-			form
+			form,
+			concepts,
 		};
 	}
 };
