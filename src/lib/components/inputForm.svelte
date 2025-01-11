@@ -54,6 +54,12 @@
 	let selectedDate: DateValue | undefined = $derived($formData.date ? parseDate($formData.date) : undefined);
 	1;
 	let placeholderDate: DateValue = $state(today(getLocalTimeZone()));
+
+	let received = $state(false);
+
+	function toggle_receive() {
+		received = true;
+	}
 </script>
 
 <form method="POST" use:enhance>
@@ -152,7 +158,10 @@
 			</div>
 		</div>
 		<div class="flex-grow-0">
-			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800">✨ Generate your study guide!</Form.Button>
+			<Form.Button class="bg-gradient-to-l from-red-300 to-blue-800" onclick={toggle_receive}>✨ Generate your study
+				guide!
+			</Form.Button>
+			<p class="{received ? '' : 'hidden'}">Request received!</p>
 		</div>
 	</div>
 	<!--{#if browser && dev}
