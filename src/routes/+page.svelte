@@ -1,12 +1,12 @@
 <script lang="ts">
 	import InputForm from '$lib/components/inputForm.svelte';
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import YoutubeColumn from '$lib/components/yt/youtubeColumn.svelte';
 	import SummaryColumn from '$lib/components/summaries/summaryColumn.svelte';
 	import QuizletColumn from '$lib/components/quizlet/quizletColumn.svelte';
 	import ScheduleColumn from '$lib/components/schedule/scheduleColumn.svelte';
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	let data = $props();
 
@@ -17,7 +17,7 @@
 	}
 
 	onMount(() => {
-		window.addEventListener("scroll", handleScroll);
+		window.addEventListener('scroll', handleScroll);
 	});
 
 	function scrollToSection(sectionId: string) {
@@ -28,29 +28,16 @@
 	}
 </script>
 
-<!-- navbar -->
-<div class="flex justify-between items-center bg-slate-700 px-5 py-5">
-	<div class="flex justify-start items-center space-x-5">
-		<b><h2 class="text-2xl font-bold text-white">Made with ❤️ by Andrey and Émilien</h2></b>
-	</div>
-	<div class="flex justify-end items-center">
-		<a target="_blank" href="https://github.com/ThousandthStar/brebeufhx8">
-			<Avatar.Root>
-				<Avatar.Image src="/img/GitHub-Mark-ea2971cee799.png" alt="GitHub" />
-				<Avatar.Fallback>GitHub</Avatar.Fallback>
-			</Avatar.Root>
-		</a>
-	</div>
-</div>
-
-
 <!-- title -->
-<div class="flex flex-col h-[50rem] items-center justify-start space-y-7">
-	<h1 class="text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-800 bg-clip-text text-transparent mt-[25rem]">
+<div class="flex flex-col h-[50rem] items-center justify-start space-y-7 title_bg">
+	<h1
+		class="text-9xl font-bold bg-gradient-to-l from-red-300 to-blue-400 bg-clip-text text-transparent mt-[25rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  brightness-75">
 		STUDBUD
 	</h1>
 	{#if atTop}
-		<Button variant="outline" class="text-md" onclick={() => scrollToSection('content')}>Start studying!</Button>
+		<div transition:fade>
+			<Button variant="outline" class="text-md" onclick={() => scrollToSection('content')}>Start studying!</Button>
+		</div>
 	{/if}
 </div>
 
@@ -75,3 +62,15 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+    .title_bg {
+        background-color: #ffd899;
+        background-image: radial-gradient(at 52% 91%, hsla(240, 63%, 64%, 1) 0px, transparent 50%),
+        radial-gradient(at 68% 4%, hsla(72, 100%, 72%, 1) 0px, transparent 50%),
+        radial-gradient(at 70% 11%, hsla(31, 95%, 68%, 1) 0px, transparent 50%),
+        radial-gradient(at 0% 69%, hsla(217, 90%, 55%, 1) 0px, transparent 50%),
+        radial-gradient(at 76% 47%, hsla(278, 81%, 63%, 1) 0px, transparent 50%),
+        radial-gradient(at 98% 20%, hsla(4, 86%, 52%, 1) 0px, transparent 50%);
+    }
+</style>
