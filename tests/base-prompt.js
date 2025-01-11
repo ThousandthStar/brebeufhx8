@@ -21,7 +21,16 @@ Subject: {subject}
 Grade: grade {grade}
 Evaluation type: {type}
 
-Please output the response as a valid JSON string containing a single list named \` "key_concepts" \` with all the key concepts.`)
+Please output the response as a valid JSON string like the example below: 
+Example: 
+{{
+  'key_concepts': [
+    'First concept',
+    'Second concept',
+    'Third concept'
+  ]
+}}
+`)
 
 const llm = new ChatOpenAI({
     temperature: 0.0,
@@ -40,4 +49,5 @@ const res = await chain.invoke({
 })
 
 console.log(res)
+console.log(res.key_concepts)
 
