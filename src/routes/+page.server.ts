@@ -26,21 +26,40 @@ export const actions: Actions = {
 			type: formData.type_of_eval
 		};
 
+		// TODO: Uncomment this when the API is ready
 		// Get concepts
-		const concepts = await event
-			.fetch('/api/base-concepts', {
+		// const concepts = await event
+		// 	.fetch('/api/base-concepts', {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 		},
+		// 		body: JSON.stringify(correctFormData)
+		// 	})
+		// 	.then((res) => res.json());
+		let concepts = ['n1', 'n2', 'n3'];
+
+		// TODO: all the other things <--- this is here. (suppose concepts is ok)
+
+
+		// Get summaries
+		const summaries = await event
+			.fetch('/api/summaries', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(correctFormData)
+				body: JSON.stringify({
+					concepts,
+					grade: formData.grade
+				})
 			})
 			.then((res) => res.json());
 
-		//TODO: all the other things <--- this is here. (suppose concepts is ok)
-
 		return {
-			form
+			form,
+			concepts,
+			summaries
 		};
 	}
 };
